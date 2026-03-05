@@ -6,27 +6,24 @@ try:
         host="localhost",
         database="usersdb",
         user="root",
-        password="**",
+        password="",
         port="3306",
     )
 
     cursor = conn.cursor()
 
-    myquery2 = """
-    CREATE TABLE Laptop (
-        Id INT NOT NULL,
-        Name VARCHAR(250) NOT NULL,
-        Price FLOAT NOT NULL,
-        Purchase_date DATE NOT NULL
-    )
+    mySql_insert_query = """
+    INSERT INTO Laptop (Id, Name, Price, Purchase_date)
+    VALUES (15, 'Lenovo ThinkPad P71', 6459, '2019-08-14')
     """
 
-    cursor.execute(myquery2)
+    cursor.execute(mySql_insert_query)
+    conn.commit()
 
-    print("Table is created")
+    print(cursor.rowcount, "Record inserted successfully")
 
 except Error as e:
-    print("Failed to create table {}".format(e))
+    print("Failed to insert record {}".format(e))
 
 finally:
     if conn.is_connected():
